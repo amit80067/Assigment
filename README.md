@@ -36,7 +36,7 @@ A microservices architecture using Docker Compose with nginx reverse proxy, Go s
    curl http://localhost:8002/ping
    ```
 
-##  Routing & API Endpoints
+## Routing & API Endpoints
 
 ### Nginx Reverse Proxy (Port 8080)
 - **Service 1**: `http://localhost:8080/service1/*` → `http://service_1:8001/*`
