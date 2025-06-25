@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  nginx:
+    build: ./nginx
+    ports:
+      - "8080:80"
+    depends_on:
+      - service_1
+      - service_2
+    network_mode: bridge
+    links:
+      - service_1
+      - service_2
+
+  service_1:
+    build: ./service_1
+    ports:
+      - "8001:8001"
+    network_mode: bridge
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/ping"]
+      interval: 10s
+      retries: 3
+
+  service_2:
+    build: ./service_2
+    ports:
+      - "8002:8002"
+    network_mode: bridge
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8002/ping"]
+      interval: 10s
+      retries: 3
